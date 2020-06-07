@@ -8,12 +8,6 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  overrides: [
-    {
-      env: { jest: true },
-      files: ['__tests__/**/*.ts'],
-    },
-  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 11,
