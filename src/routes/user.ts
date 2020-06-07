@@ -53,9 +53,7 @@ router.post('/', async (req, res) => {
       .json({ success: false, error: error.details[0].message });
   }
   try {
-    const user = (((await db<User>('user')
-      .returning('*')
-      .insert(value)) as unknown) as User[])[0];
+    const user = (await db<User>('user').insert(value).returning('*'))[0];
     return res.status(201).json({ success: true, user });
   } catch {
     return res.status(500).json({ success: false, error: 'Database error' });
@@ -70,10 +68,12 @@ router.patch('/:id', getUserById, async (req, res) => {
       .json({ success: false, error: error.details[0].message });
   }
   try {
-    const user = (((await db<User>('user')
-      .returning('*')
-      .update(value)
-      .where('id', '=', req.params.id)) as unknown) as User[])[0];
+    const user = (
+      await db<User>('user')
+        .update(value)
+        .where('id', '=', req.params.id)
+        .returning('*')
+    )[0];
     return res.status(200).json({ success: true, user });
   } catch {
     return res.status(500).json({ success: false, error: 'Database error' });
@@ -88,10 +88,12 @@ router.put('/:id', getUserById, async (req, res) => {
       .json({ success: false, error: error.details[0].message });
   }
   try {
-    const user = (((await db<User>('user')
-      .returning('*')
-      .update(value)
-      .where('id', '=', req.params.id)) as unknown) as User[])[0];
+    const user = (
+      await db<User>('user')
+        .update(value)
+        .where('id', '=', req.params.id)
+        .returning('*')
+    )[0];
     return res.status(200).json({ success: true, user });
   } catch {
     return res.status(500).json({ success: false, error: 'Database error' });
