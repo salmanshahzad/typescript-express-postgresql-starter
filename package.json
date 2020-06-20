@@ -8,7 +8,7 @@
     "prebuild": "rm -rf build",
     "build": "tsc",
     "postbuild": "mv build/src build-temp && rm -rf build && mv build-temp build",
-    "lint": "eslint --fix **/*.ts && prettier --write **/*.ts",
+    "lint": "eslint --fix \"**/*.ts\" && prettier --write \"**/*.ts\"",
     "start": "ts-node-dev --no-notify --respawn src/index.ts",
     "test": "jest"
   },

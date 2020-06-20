@@ -1,13 +1,14 @@
 import { Router } from 'express';
 
+import { UserRepository } from '../types/user';
 import userRoutes from './user';
 
-const router = Router();
+function apiRoutes(userRepository: UserRepository): Router {
+  const router = Router();
 
-router.post('/message', (req, res) => {
-  res.json({ message: req.body.message });
-});
+  router.use('/user', userRoutes(userRepository));
 
-router.use('/user', userRoutes);
+  return router;
+}
 
-export default router;
+export default apiRoutes;
